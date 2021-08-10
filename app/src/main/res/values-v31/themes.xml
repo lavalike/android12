@@ -1,0 +1,9 @@
+<resources>
+
+    <style name="AppTheme" parent="BaseTheme">
+        <item name="android:windowSplashScreenBackground">#F18C1A</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@mipmap/ic_loading_logo</item>
+        <item name="android:windowSplashScreenAnimationDuration">1000</item>
+        <item name="android:windowSplashScreenBrandingImage">@drawable/window_splash_screen_content</item>
+    </style>
+</resources>
