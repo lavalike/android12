@@ -1,9 +1,17 @@
 <resources>
 
     <style name="AppTheme" parent="BaseTheme">
+        <!-- 单色填充背景 -->
         <item name="android:windowSplashScreenBackground">#F18C1A</item>
+        <!-- 替换ICON -->
         <item name="android:windowSplashScreenAnimatedIcon">@mipmap/ic_loading_logo</item>
+        <!-- 设置启动画面在关闭之前显示的时长。最长时间为 1000 毫秒 -->
         <item name="android:windowSplashScreenAnimationDuration">1000</item>
-        <item name="android:windowSplashScreenBrandingImage">@drawable/window_splash_screen_content</item>
+        <!-- 设置启动画面图标后面的背景 -->
+        <item name="android:windowSplashScreenIconBackgroundColor">#ffffff</item>
+        <!-- 设置要显示在启动画面底部的图片。设计准则建议不要使用品牌图片。 -->
+        <item name="android:windowSplashScreenBrandingImage">
+            @drawable/window_splash_screen_content
+        </item>
     </style>
 </resources>
