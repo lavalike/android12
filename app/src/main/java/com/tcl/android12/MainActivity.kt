@@ -2,6 +2,7 @@ package com.tcl.android12
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.graphics.Path
 import android.os.Build
 import android.os.Bundle
@@ -12,6 +13,8 @@ import android.window.SplashScreenView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
+import androidx.core.splashscreen.SplashScreen
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
 /**
  * MainActivity
@@ -22,28 +25,65 @@ class MainActivity : AppCompatActivity() {
         const val DURATION = 2000
     }
 
+    private lateinit var compatSplashScreen: SplashScreen
+
     private val initTime = SystemClock.uptimeMillis()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        compatSplashScreen = installSplashScreen()
         setContentView(R.layout.activity_main)
 
-//        splashDelay()
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
+            compatDelay()
+            compatExit()
+        } else {
+            splashDelay()
+            splashExit()
+        }
 
-        splashExit()
+        findViewById<View>(R.id.btn).setOnClickListener {
+            startActivity(Intent(this, SecondActivity::class.java))
+        }
     }
 
+    private fun compatExit() {
+        compatSplashScreen.setOnExitAnimationListener { provider ->
+            val iconView = provider.iconView
+            AnimatorSet().apply {
+                playSequentially(
+                    ObjectAnimator.ofFloat(iconView, View.TRANSLATION_Y, 0f, 50f),
+                    ObjectAnimator.ofFloat(
+                        iconView,
+                        View.TRANSLATION_Y,
+                        50f,
+                        -provider.view.height.toFloat()
+                    ),
+                )
+                doOnEnd {
+                    provider.remove()
+                }
+                start()
+            }
+        }
+    }
+
+    private fun compatDelay() {
+        compatSplashScreen.setKeepVisibleCondition {
+            (SystemClock.uptimeMillis() - initTime) < DURATION
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
     private fun splashExit() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            splashScreen.setOnExitAnimationListener { splashScreenView ->
-                // 默认退出效果
+        splashScreen.setOnExitAnimationListener { splashScreenView ->
+            // 默认退出效果
 //                 splashScreenView.remove()
 
-                // 缩小出屏幕
+            // 缩小出屏幕
 //                 scaleExit(splashScreenView)
 
-                // 向上平移出屏幕
-                slideUp(splashScreenView)
-            }
+            // 向上平移出屏幕
+            slideUp(splashScreenView)
         }
     }
 

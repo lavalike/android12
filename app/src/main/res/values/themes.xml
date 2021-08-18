@@ -1,6 +1,23 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="BaseTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <!-- jetpack core splashscreen -->
+    <style name="JetpackSplashBaseTheme" parent="Theme.SplashScreen">
+        <!-- 默认主题必须继扩展自预设主题Theme.SplashScreen -->
+        <!-- 同时覆写一下Icon、Duration和ScreenBackground三个属性 -->
+        <!-- 面向12的主题的部分属性和默认主题是一致的，所以将共通的部分抽出到Base中复用 -->
+
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_loading_logo</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+        <item name="windowSplashScreenBackground">#f18c1a</item>
+
+        <!-- 需要配置postSplashScreenTheme属性，主题需要是AppCompat -->
+        <!-- You need to use a Theme.AppCompat theme (or descendant) with this activity -->
+        <item name="postSplashScreenTheme">@style/UiTheme</item>
+    </style>
+
+    <style name="JetpackSplashTheme" parent="JetpackSplashBaseTheme" />
+
+    <!-- Base activity ui theme. -->
+    <style name="UiTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -11,8 +28,5 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
     </style>
-
-    <style name="AppTheme" parent="BaseTheme" />
 </resources>

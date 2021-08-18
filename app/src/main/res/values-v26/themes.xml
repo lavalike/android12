@@ -1,6 +1,0 @@
-<resources>
-
-    <style name="AppTheme" parent="BaseTheme">
-        <item name="android:windowSplashscreenContent">@drawable/window_splash_screen_content</item>
-    </style>
-</resources>
