@@ -1,7 +1,7 @@
 <resources>
 
     <style name="JetpackSplashTheme" parent="JetpackSplashBaseTheme">
-        <!-- 替换ICON -->
+        <!-- 可选：替换ICON -->
         <item name="android:windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_round</item>
 
         <!-- 设置启动画面图标后面的背景 -->
