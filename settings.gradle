@@ -5,6 +5,15 @@ dependencyResolutionManagement {
         mavenCentral()
         jcenter() // Warning: this repository is going to shut down soon
         maven { url 'https://jitpack.io' }
+
+        maven {
+            allowInsecureProtocol true
+            url 'http://10.120.16.3:8081/repository/maven-snapshots/'
+        }
+        maven {
+            allowInsecureProtocol true
+            url 'http://10.120.16.3:8081/repository/maven-releases/'
+        }
     }
 }
 rootProject.name = "android12"
