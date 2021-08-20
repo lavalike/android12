@@ -2,7 +2,7 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
 }
-apply from: '../script/publish-0.0.2.gradle'
+//apply from: '../script/publish-7.x.gradle'
 
 android {
     compileSdk 31
