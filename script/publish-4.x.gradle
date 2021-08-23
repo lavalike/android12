@@ -42,10 +42,10 @@ task pushTag(type: Exec) {
 uploadArchives {
     repositories {
         mavenDeployer {
-            snapshotRepository(url: 'http://10.120.16.3:8081/repository/maven-snapshots/') {
+            snapshotRepository(url: 'http://10.120.16.12:8081/repository/maven-snapshots/') {
                 authentication(userName: 'deployment', password: 'deployment123')
             }
-            repository(url: 'http://10.120.16.3:8081/repository/maven-releases/') {
+            repository(url: 'http://10.120.16.12:8081/repository/maven-releases/') {
                 authentication(userName: 'deployment', password: 'deployment123')
             }
             pom.project {

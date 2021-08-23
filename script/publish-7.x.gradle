@@ -44,10 +44,10 @@ uploadArchives {
     repositories {
         //配置仓库地址和模块相关信息
         mavenDeployer {
-            snapshotRepository(url: 'http://10.120.16.3:8081/repository/maven-snapshots/') {
+            snapshotRepository(url: 'http://10.120.16.12:8081/repository/maven-snapshots/') {
                 authentication(userName: 'deployment', password: 'deployment123')
             }
-            repository(url: 'http://10.120.16.3:8081/repository/maven-releases/') {
+            repository(url: 'http://10.120.16.12:8081/repository/maven-releases/') {
                 authentication(userName: 'deployment', password: 'deployment123')
             }
             pom.project {
