@@ -3,16 +3,15 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        jcenter() // Warning: this repository is going to shut down soon
         maven { url 'https://jitpack.io' }
 
         maven {
             allowInsecureProtocol true
-            url 'http://10.120.16.3:8081/repository/maven-snapshots/'
+            url 'http://10.120.16.12:8081/repository/maven-snapshots/'
         }
         maven {
             allowInsecureProtocol true
-            url 'http://10.120.16.3:8081/repository/maven-releases/'
+            url 'http://10.120.16.12:8081/repository/maven-releases/'
         }
     }
 }

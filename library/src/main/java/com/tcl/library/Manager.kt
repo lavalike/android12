@@ -6,4 +6,8 @@ object Manager {
 
     fun getGoogle() = Servers.GOOGLE
 
+    fun getBaidu() = Servers.BAIDU
+
+    fun getTencent() = Servers.TENCENT
+
 }

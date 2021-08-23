@@ -1,8 +1,10 @@
 // agp 7.x
 apply plugin: 'maven-publish'
 
+def libGroupId = "com.tcl.ff.component"
 def libArtifactId = project.name
-def libDescription = '组件默认描述'
+def libVersion = "0.0.1-SNAPSHOT"
+def libDescription = 'default description'
 
 task readProperty() {
     File file = project.file("publish.properties")
@@ -12,7 +14,7 @@ task readProperty() {
         writer.writeLine("groupId=com.tcl.ff.component")
         writer.writeLine("artifactId=" + project.name)
         writer.writeLine("version=0.0.1-SNAPSHOT")
-        writer.writeLine("description=组件默认描述")
+        writer.writeLine("description=default description")
         writer.close()
         throw new FileNotFoundException("请修改" + file.getPath() + "中的默认信息!\n只提醒一次，否则使用默认!");
     }
@@ -21,23 +23,51 @@ task readProperty() {
     InputStream inputStream = file.newInputStream()
     properties.load(inputStream)
 
-    group = properties.getProperty("groupId")
+    libGroupId = properties.getProperty("groupId")
     libArtifactId = properties.getProperty("artifactId")
-    version = properties.getProperty("version")
+    libVersion = properties.getProperty("version")
     libDescription = properties.getProperty("description")
     inputStream.close()
+
+    println "-> groupId $libGroupId"
+    println "-> artifactId $libArtifactId"
+    println "-> version $libVersion"
+    println "-> description $libDescription"
 }
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            artifactId = libArtifactId
+task sourceJar(type: Jar) {
+    classifier 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
 
-            pom {
-                name = libArtifactId
-                description = libDescription
+afterEvaluate {
+    publishing {
+        publications {
+            aar(MavenPublication) {
+                groupId = libGroupId
+                artifactId = libArtifactId
+                version = libVersion
+
+                artifact bundleReleaseAar
+                artifact sourceJar
             }
+        }
 
+        repositories {
+            maven {
+                allowInsecureProtocol true
+
+                def releaseUrl = "http://10.120.16.12:8081/repository/maven-releases/"
+                def snapshotUrl = "http://10.120.16.12:8081/repository/maven-snapshots/"
+                url libVersion.endsWith("-SNAPSHOT") ? snapshotUrl : releaseUrl
+
+                println "-> publish url $url"
+
+                credentials {
+                    username 'deployment'
+                    password 'deployment123'
+                }
+            }
         }
     }
 }
