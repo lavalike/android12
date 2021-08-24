@@ -16,7 +16,8 @@ class SecondActivity : AppCompatActivity() {
             finish()
         }
 
-        val msg = "${Manager.getTcl()}\n${Manager.getGoogle()}"
+        val msg =
+            "${Manager.getTcl()}\n${Manager.getGoogle()}\n${Manager.getBaidu()}\n${Manager.getTencent()}"
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 }
