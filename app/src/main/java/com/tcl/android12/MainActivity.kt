@@ -15,12 +15,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.tcl.android12.databinding.ActivityMainBinding
 
 /**
  * MainActivity
  * Created by wangzhen on 2021/8/10
  */
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     companion object {
         const val DURATION = 2000
     }
@@ -31,7 +35,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         compatSplashScreen = installSplashScreen()
-        setContentView(R.layout.activity_main)
+        setContentView(ActivityMainBinding.inflate(layoutInflater).apply {
+            binding = this
+        }.root)
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
             compatDelay()
@@ -41,7 +47,7 @@ class MainActivity : AppCompatActivity() {
             splashExit()
         }
 
-        findViewById<View>(R.id.btn).setOnClickListener {
+        binding.btn.setOnClickListener {
             startActivity(Intent(this, SecondActivity::class.java))
         }
     }

@@ -1,18 +1,22 @@
 package com.tcl.android12
 
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.tcl.android12.databinding.ActivitySecondBinding
 import com.tcl.library.Manager
 
 class SecondActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySecondBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // setTheme(R.style.UiTheme)
-        setContentView(R.layout.activity_second)
+        setContentView(ActivitySecondBinding.inflate(layoutInflater).apply {
+            binding = this
+        }.root)
 
-        findViewById<View>(R.id.btn).setOnClickListener {
+        binding.btn.setOnClickListener {
             finish()
         }
 
